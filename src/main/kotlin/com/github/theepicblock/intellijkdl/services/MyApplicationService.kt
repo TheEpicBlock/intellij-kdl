@@ -1,6 +1,6 @@
-package org.jetbrains.plugins.template.services
+package com.github.theepicblock.intellijkdl.services
 
-import org.jetbrains.plugins.template.MyBundle
+import com.github.theepicblock.intellijkdl.MyBundle
 
 class MyApplicationService {
 
