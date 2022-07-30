@@ -1,4 +1,4 @@
-package com.github.theepicblock.intellijkdl
+package nl.theepicblock.intellijkdl
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.NonNls

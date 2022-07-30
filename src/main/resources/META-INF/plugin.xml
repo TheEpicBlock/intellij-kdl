@@ -1,18 +1,18 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.theepicblock.intellijkdl</id>
+    <id>nl.theepicblock.intellijkdl</id>
     <name>intellij-kdl</name>
     <vendor>theepicblock</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.theepicblock.intellijkdl.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.theepicblock.intellijkdl.services.MyProjectService"/>
+        <applicationService serviceImplementation="nl.theepicblock.intellijkdl.services.MyApplicationService"/>
+        <projectService serviceImplementation="nl.theepicblock.intellijkdl.services.MyProjectService"/>
     </extensions>
 
     <applicationListeners>
-        <listener class="com.github.theepicblock.intellijkdl.listeners.MyProjectManagerListener"
+        <listener class="nl.theepicblock.intellijkdl.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
 </idea-plugin>

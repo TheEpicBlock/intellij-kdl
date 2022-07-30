@@ -1,6 +1,6 @@
-package com.github.theepicblock.intellijkdl.services
+package nl.theepicblock.intellijkdl.services
 
-import com.github.theepicblock.intellijkdl.MyBundle
+import nl.theepicblock.intellijkdl.MyBundle
 
 class MyApplicationService {
 

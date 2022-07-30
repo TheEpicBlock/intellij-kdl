@@ -1,7 +1,7 @@
-package com.github.theepicblock.intellijkdl.services
+package nl.theepicblock.intellijkdl.services
 
 import com.intellij.openapi.project.Project
-import com.github.theepicblock.intellijkdl.MyBundle
+import nl.theepicblock.intellijkdl.MyBundle
 
 class MyProjectService(project: Project) {
 
