@@ -1,0 +1,20 @@
+{
+  parserClass="nl.theepicblock.intellijkdl.KdlParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Kdl"
+  psiImplClassSuffix="Impl"
+  psiPackage="nl.theepicblock.intellijkdl.psi"
+  psiImplPackage="nl.theepicblock.intellijkdl.psi.impl"
+
+  elementTypeHolderClass="nl.theepicblock.intellijkdl.psi.KdlTypes"
+  elementTypeClass="nl.theepicblock.intellijkdl.KdlElementType"
+  tokenTypeClass="nl.theepicblock.intellijkdl.KdlTokenType"
+}
+
+simpleFile ::= item_*
+
+private item_ ::= (property|COMMENT|CRLF)
+
+property ::= (KEY? SEPARATOR VALUE?) | KEY
