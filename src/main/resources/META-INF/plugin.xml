@@ -15,6 +15,9 @@
                 fieldName="INSTANCE"
                 language="kdl"
                 extensions="kdl"/>
+        <lang.parserDefinition
+                language="kdl"
+                implementationClass="nl.theepicblock.intellijkdl.KdlParserDefinition"/>
     </extensions>
 
     <applicationListeners>

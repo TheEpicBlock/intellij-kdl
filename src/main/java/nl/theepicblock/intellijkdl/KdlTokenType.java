@@ -13,6 +13,6 @@ public class KdlTokenType extends IElementType {
 
     @Override
     public String toString() {
-        return "KdlTokenType"+super.toString();
+        return "KdlTokenType."+super.toString();
     }
 }
