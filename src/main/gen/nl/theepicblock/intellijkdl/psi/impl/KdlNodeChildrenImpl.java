@@ -29,12 +29,6 @@ public class KdlNodeChildrenImpl extends ASTWrapperPsiElement implements KdlNode
 
   @Override
   @NotNull
-  public List<KdlNodeSpace> getNodeSpaceList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, KdlNodeSpace.class);
-  }
-
-  @Override
-  @NotNull
   public KdlNodes getNodes() {
     return findNotNullChildByClass(KdlNodes.class);
   }

@@ -105,7 +105,7 @@ public class KdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (ctxcomment node-space*)? startnode-wrapper nodes endnode
+  // (ctxcomment /*node-space**/)? startnode-wrapper nodes endnode
   public static boolean node_children(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "node_children")) return false;
     if (!nextTokenIs(b, "<node children>", CTXCOMMENT, STARTNODE)) return false;
@@ -119,37 +119,15 @@ public class KdlParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (ctxcomment node-space*)?
+  // (ctxcomment /*node-space**/)?
   private static boolean node_children_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "node_children_0")) return false;
-    node_children_0_0(b, l + 1);
-    return true;
-  }
-
-  // ctxcomment node-space*
-  private static boolean node_children_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "node_children_0_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, CTXCOMMENT);
-    r = r && node_children_0_0_1(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // node-space*
-  private static boolean node_children_0_0_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "node_children_0_0_1")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!node_space(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "node_children_0_0_1", c)) break;
-    }
+    consumeToken(b, CTXCOMMENT);
     return true;
   }
 
   /* ********************************************************** */
-  // (ctxcomment node-space*)? (prop | value)
+  // (ctxcomment /*node-space**/)? (prop | value)
   public static boolean node_prop_or_arg(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "node_prop_or_arg")) return false;
     boolean r;
@@ -160,32 +138,10 @@ public class KdlParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // (ctxcomment node-space*)?
+  // (ctxcomment /*node-space**/)?
   private static boolean node_prop_or_arg_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "node_prop_or_arg_0")) return false;
-    node_prop_or_arg_0_0(b, l + 1);
-    return true;
-  }
-
-  // ctxcomment node-space*
-  private static boolean node_prop_or_arg_0_0(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "node_prop_or_arg_0_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = consumeToken(b, CTXCOMMENT);
-    r = r && node_prop_or_arg_0_0_1(b, l + 1);
-    exit_section_(b, m, null, r);
-    return r;
-  }
-
-  // node-space*
-  private static boolean node_prop_or_arg_0_0_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "node_prop_or_arg_0_0_1")) return false;
-    while (true) {
-      int c = current_position_(b);
-      if (!node_space(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "node_prop_or_arg_0_0_1", c)) break;
-    }
+    consumeToken(b, CTXCOMMENT);
     return true;
   }
 
@@ -273,7 +229,7 @@ public class KdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (ctxcomment node-space*)? type? identifier (node-space+ node-prop-or-arg)* (node-space* node-children ws*)? node-space* node-terminator
+  // (ctxcomment node-space*)? type? identifier (node-space?/*+*/ node-prop-or-arg)* (node-space* node-children ws*)? node-space* node-terminator
   public static boolean node_(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "node_")) return false;
     boolean r;
@@ -325,7 +281,7 @@ public class KdlParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // (node-space+ node-prop-or-arg)*
+  // (node-space?/*+*/ node-prop-or-arg)*
   private static boolean node__3(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "node__3")) return false;
     while (true) {
@@ -336,7 +292,7 @@ public class KdlParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // node-space+ node-prop-or-arg
+  // node-space?/*+*/ node-prop-or-arg
   private static boolean node__3_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "node__3_0")) return false;
     boolean r;
@@ -347,19 +303,11 @@ public class KdlParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // node-space+
+  // node-space?
   private static boolean node__3_0_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "node__3_0_0")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = node_space(b, l + 1);
-    while (r) {
-      int c = current_position_(b);
-      if (!node_space(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "node__3_0_0", c)) break;
-    }
-    exit_section_(b, m, null, r);
-    return r;
+    node_space(b, l + 1);
+    return true;
   }
 
   // (node-space* node-children ws*)?

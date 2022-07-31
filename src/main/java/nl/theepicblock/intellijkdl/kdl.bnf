@@ -18,7 +18,7 @@ kdlFile ::= nodes
 //nodes ::= linespace* (node_ nodes?)? linespace*
 nodes ::= linespace* (node_ linespace*)*
 
-node_ ::= (ctxcomment node-space*)? type? identifier (node-space+ node-prop-or-arg)* (node-space* node-children ws*)? node-space* node-terminator
+node_ ::= (ctxcomment node-space*)? type? identifier (node-space?/*+*/ node-prop-or-arg)* (node-space* node-children ws*)? node-space* node-terminator
 node-prop-or-arg ::= (ctxcomment node-space*)? (prop | value)
 node-space ::= ws* escline ws* | ws+
 node-children ::= (ctxcomment node-space*)? startnode-wrapper nodes endnode

@@ -28,12 +28,6 @@ public class KdlNodePropOrArgImpl extends ASTWrapperPsiElement implements KdlNod
   }
 
   @Override
-  @NotNull
-  public List<KdlNodeSpace> getNodeSpaceList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, KdlNodeSpace.class);
-  }
-
-  @Override
   @Nullable
   public KdlProp getProp() {
     return findChildByClass(KdlProp.class);

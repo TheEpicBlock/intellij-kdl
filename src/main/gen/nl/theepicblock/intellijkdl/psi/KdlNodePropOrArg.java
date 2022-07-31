@@ -7,9 +7,6 @@ import com.intellij.psi.PsiElement;
 
 public interface KdlNodePropOrArg extends PsiElement {
 
-  @NotNull
-  List<KdlNodeSpace> getNodeSpaceList();
-
   @Nullable
   KdlProp getProp();
 

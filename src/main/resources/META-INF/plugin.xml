@@ -15,25 +15,25 @@
                 fieldName="INSTANCE"
                 language="kdl"
                 extensions="kdl"/>
-        <lang.parserDefinition
-                language="kdl"
-                implementationClass="nl.theepicblock.intellijkdl.KdlParserDefinition"/>
-        <lang.syntaxHighlighterFactory
-                language="kdl"
-                implementationClass="nl.theepicblock.intellijkdl.highlighting.KdlSyntaxHighlighterFactory"/>
-        <colorSettingsPage
-                implementation="nl.theepicblock.intellijkdl.highlighting.KdlColorSettingsPage"/>
-        <highlightVisitor
-                implementation="nl.theepicblock.intellijkdl.highlighting.KdlRainbowVisitor"/>
-        <annotator
-                language="kdl"
-                implementationClass="nl.theepicblock.intellijkdl.highlighting.KdlAnnotator"/>
-        <additionalTextAttributes
-                scheme="Default"
-                file="colorScheme/Default_kdl.xml"/>
-        <additionalTextAttributes
-                scheme="Darcula"
-                file="colorScheme/Darcula_kdl.xml"/>
+
+        <!-- Highlighting -->
+        <lang.parserDefinition language="kdl" implementationClass="nl.theepicblock.intellijkdl.KdlParserDefinition"/>
+        <lang.syntaxHighlighterFactory language="kdl" implementationClass="nl.theepicblock.intellijkdl.highlighting.KdlSyntaxHighlighterFactory"/>
+        <lang.braceMatcher language="kdl" implementationClass="nl.theepicblock.intellijkdl.highlighting.KdlBraceMatcher"/>
+        <colorSettingsPage implementation="nl.theepicblock.intellijkdl.highlighting.KdlColorSettingsPage"/>
+        <highlightVisitor implementation="nl.theepicblock.intellijkdl.highlighting.KdlRainbowVisitor"/>
+        <annotator language="kdl" implementationClass="nl.theepicblock.intellijkdl.highlighting.KdlAnnotator"/>
+
+        <!-- Typing -->
+        <lang.formatter language="kdl" implementationClass="nl.theepicblock.intellijkdl.typing.KdlFormattingModelBuilder"/>
+        <codeStyleSettingsProvider implementation="nl.theepicblock.intellijkdl.typing.KdlCodeStyleSettingsProvider"/>
+        <langCodeStyleSettingsProvider implementation="nl.theepicblock.intellijkdl.typing.KdlLanguageCodeStyleSettingsProvider"/>
+        <quoteHandler fileType="kdl" className="nl.theepicblock.intellijkdl.typing.KdlQuoteHandler"/>
+        <enterBetweenBracesDelegate language="kdl"  implementationClass="nl.theepicblock.intellijkdl.typing.KdlEnterBetweenBracesDelegate"/>
+
+        <!-- Theming -->
+        <additionalTextAttributes scheme="Default" file="colorScheme/Default_kdl.xml"/>
+        <additionalTextAttributes scheme="Darcula" file="colorScheme/Darcula_kdl.xml"/>
     </extensions>
 
     <applicationListeners>

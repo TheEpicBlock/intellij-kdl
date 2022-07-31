@@ -14,6 +14,8 @@ import com.intellij.psi.tree.TokenSet;
 import nl.theepicblock.intellijkdl.psi.KdlTypes;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.annotation.ElementType;
+
 
 public class KdlParserDefinition implements ParserDefinition {
     public static final TokenSet WHITE_SPACES = TokenSet.create(/*KdlTypes.LINESPACE, KdlTypes.NEWLINE, KdlTypes.WS, KdlTypes.UNICODESPACE, KdlTypes.BOM*/);

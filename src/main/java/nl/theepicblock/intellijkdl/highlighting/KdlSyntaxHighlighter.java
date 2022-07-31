@@ -64,7 +64,7 @@ public class KdlSyntaxHighlighter extends SyntaxHighlighterBase {
         if (tokenType.equals(KdlTypes.STARTTYPE)) return new TextAttributesKey[]{PARENTHESES};
         if (tokenType.equals(KdlTypes.ENDTYPE)) return new TextAttributesKey[]{PARENTHESES};
         if (tokenType.equals(KdlTypes.SEMICOLON)) return new TextAttributesKey[]{SEMICOLON};
-        if (tokenType.equals(KdlTypes.BAREIDENTIFIER)) return new TextAttributesKey[]{NODE_NAME}; // Sets all bare identifiers to look like node names, will be replaced with the correct values via the annotator
+//        if (tokenType.equals(KdlTypes.BAREIDENTIFIER)) return new TextAttributesKey[]{PROPERTY_KEY}; // Sets all bare identifiers to look like property keys, will be replaced with the correct values via the annotator
         if (tokenType.equals(TokenType.BAD_CHARACTER)) return new TextAttributesKey[]{BAD_CHARACTER};
         return new TextAttributesKey[0];
     }
