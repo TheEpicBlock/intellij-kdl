@@ -21,7 +21,7 @@ public class KdlAnnotator implements Annotator {
             } else if (element.getParent() instanceof KdlNode_) {
                 holder.newSilentAnnotation(HighlightSeverity.INFORMATION).textAttributes(KdlSyntaxHighlighter.NODE_NAME).create();
             } else if (element.getParent() instanceof KdlProp) {
-                holder.newSilentAnnotation(HighlightSeverity.INFORMATION).textAttributes(KdlSyntaxHighlighter.KEY).create();
+                holder.newSilentAnnotation(HighlightSeverity.INFORMATION).textAttributes(KdlSyntaxHighlighter.PROPERTY_KEY).create();
             }
         }
     }

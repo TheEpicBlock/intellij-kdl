@@ -35,7 +35,7 @@ public class KdlRainbowVisitor extends RainbowVisitor {
             KdlProp prop = (KdlProp)element;
             PsiFile file = element.getContainingFile();
             String name = "prop"+prop.getIdentifier().getText();
-            addInfo(getInfo(file, prop.getIdentifier(), name, KdlSyntaxHighlighter.KEY));
+            addInfo(getInfo(file, prop.getIdentifier(), name, KdlSyntaxHighlighter.PROPERTY_KEY));
             if (prop.getValue().getNumber() != null) {
                 addInfo(getInfo(file, prop.getValue().getNumber(), name, KdlSyntaxHighlighter.NUMBER));
             } else if (prop.getValue().getStringLiteral() != null) {

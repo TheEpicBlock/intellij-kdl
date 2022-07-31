@@ -415,14 +415,13 @@ public class KdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // linespace* (node_ nodes?)? linespace*
+  // linespace* (node_ linespace*)*
   public static boolean nodes(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "nodes")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _COLLAPSE_, NODES, "<nodes>");
+    Marker m = enter_section_(b, l, _NONE_, NODES, "<nodes>");
     r = nodes_0(b, l + 1);
     r = r && nodes_1(b, l + 1);
-    r = r && nodes_2(b, l + 1);
     exit_section_(b, l, m, r, false, null);
     return r;
   }
@@ -438,14 +437,18 @@ public class KdlParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // (node_ nodes?)?
+  // (node_ linespace*)*
   private static boolean nodes_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "nodes_1")) return false;
-    nodes_1_0(b, l + 1);
+    while (true) {
+      int c = current_position_(b);
+      if (!nodes_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "nodes_1", c)) break;
+    }
     return true;
   }
 
-  // node_ nodes?
+  // node_ linespace*
   private static boolean nodes_1_0(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "nodes_1_0")) return false;
     boolean r;
@@ -456,20 +459,13 @@ public class KdlParser implements PsiParser, LightPsiParser {
     return r;
   }
 
-  // nodes?
+  // linespace*
   private static boolean nodes_1_0_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "nodes_1_0_1")) return false;
-    nodes(b, l + 1);
-    return true;
-  }
-
-  // linespace*
-  private static boolean nodes_2(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "nodes_2")) return false;
     while (true) {
       int c = current_position_(b);
       if (!linespace(b, l + 1)) break;
-      if (!empty_element_parsed_guard_(b, "nodes_2", c)) break;
+      if (!empty_element_parsed_guard_(b, "nodes_1_0_1", c)) break;
     }
     return true;
   }

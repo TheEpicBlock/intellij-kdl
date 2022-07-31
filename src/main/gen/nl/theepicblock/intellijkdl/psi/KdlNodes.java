@@ -10,10 +10,7 @@ public interface KdlNodes extends PsiElement {
   @NotNull
   List<KdlLinespace> getLinespaceList();
 
-  @Nullable
-  KdlNode_ getNode_();
-
-  @Nullable
-  KdlNodes getNodes();
+  @NotNull
+  List<KdlNode_> getNode_List();
 
 }

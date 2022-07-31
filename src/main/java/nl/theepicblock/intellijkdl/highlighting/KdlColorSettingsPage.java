@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.util.HashMap;
 import java.util.Map;
 
 public class KdlColorSettingsPage implements RainbowColorSettingsPage {
@@ -26,7 +27,7 @@ public class KdlColorSettingsPage implements RainbowColorSettingsPage {
             new AttributesDescriptor("Structure//Property seperator", KdlSyntaxHighlighter.SEPARATOR),
             new AttributesDescriptor("Structure//Parentheses", KdlSyntaxHighlighter.PARENTHESES),
             new AttributesDescriptor("Structure//Semicolons", KdlSyntaxHighlighter.SEMICOLON),
-            new AttributesDescriptor("Property key", KdlSyntaxHighlighter.KEY),
+            new AttributesDescriptor("Property key", KdlSyntaxHighlighter.PROPERTY_KEY),
             new AttributesDescriptor("Type specifier", KdlSyntaxHighlighter.TYPE_SPECIFIER),
             new AttributesDescriptor("Node name", KdlSyntaxHighlighter.NODE_NAME),
             new AttributesDescriptor("Bad value", KdlSyntaxHighlighter.BAD_CHARACTER)
@@ -44,14 +45,18 @@ public class KdlColorSettingsPage implements RainbowColorSettingsPage {
 
     @Override
     public @NonNls @NotNull String getDemoText() {
-        return "\"parent node\" \"argument\" 123 {\n" +
-                "    child a=false b=null \"string\"=(type)\"string\";\n" +
+        return "<node>\"parent node\"</node> \"argument\" 123 {\n" +
+                "    <node>child</node> <key>a</key>=false <key>b</key>=null <key>\"string\"</key>=(<typeref>type</typeref>)\"string\";\n" +
                 "}";
     }
 
     @Override
     public @Nullable Map<String,TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {
-        return null;
+        Map<String,TextAttributesKey> map = new HashMap<>();
+        map.put("key", KdlSyntaxHighlighter.PROPERTY_KEY);
+        map.put("typeref", KdlSyntaxHighlighter.TYPE_SPECIFIER);
+        map.put("node", KdlSyntaxHighlighter.NODE_NAME);
+        return map;
     }
 
 
@@ -73,7 +78,7 @@ public class KdlColorSettingsPage implements RainbowColorSettingsPage {
     @Override
     public boolean isRainbowType(TextAttributesKey type) {
         return KdlSyntaxHighlighter.NODE_NAME.equals(type) ||
-                KdlSyntaxHighlighter.KEY.equals(type) ||
+                KdlSyntaxHighlighter.PROPERTY_KEY.equals(type) ||
                 KdlSyntaxHighlighter.STRING.equals(type) ||
                 KdlSyntaxHighlighter.NUMBER.equals(type) ||
                 KdlSyntaxHighlighter.NULL.equals(type) ||

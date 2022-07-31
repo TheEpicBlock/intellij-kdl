@@ -20,8 +20,8 @@ public class KdlSyntaxHighlighter extends SyntaxHighlighterBase {
     public static final TextAttributesKey SEPARATOR =
             createTextAttributesKey("KDL_SEPARATOR", DefaultLanguageHighlighterColors.OPERATION_SIGN);
     // Added by annotators
-    public static final TextAttributesKey KEY =
-            createTextAttributesKey("KDL_KEY", DefaultLanguageHighlighterColors.INSTANCE_FIELD); // This is what json does
+    public static final TextAttributesKey PROPERTY_KEY =
+            createTextAttributesKey("KDL_PROPERTY_KEY", getKeyColor());
     public static final TextAttributesKey PARENTHESES =
             createTextAttributesKey("KDL_PARENTHESES", DefaultLanguageHighlighterColors.PARENTHESES);
     public static final TextAttributesKey BRACE =
@@ -67,5 +67,13 @@ public class KdlSyntaxHighlighter extends SyntaxHighlighterBase {
         if (tokenType.equals(KdlTypes.BAREIDENTIFIER)) return new TextAttributesKey[]{NODE_NAME}; // Sets all bare identifiers to look like node names, will be replaced with the correct values via the annotator
         if (tokenType.equals(TokenType.BAD_CHARACTER)) return new TextAttributesKey[]{BAD_CHARACTER};
         return new TextAttributesKey[0];
+    }
+
+    private static TextAttributesKey getKeyColor() {
+        try {
+            return com.intellij.json.highlighting.JsonSyntaxHighlighterFactory.JSON_PROPERTY_KEY;
+        } catch (Throwable e) { // Just in case json support somehow isn't loaded
+            return DefaultLanguageHighlighterColors.INSTANCE_FIELD;
+        }
     }
 }

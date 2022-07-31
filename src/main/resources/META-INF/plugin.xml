@@ -28,6 +28,12 @@
         <annotator
                 language="kdl"
                 implementationClass="nl.theepicblock.intellijkdl.highlighting.KdlAnnotator"/>
+        <additionalTextAttributes
+                scheme="Default"
+                file="colorScheme/Default_kdl.xml"/>
+        <additionalTextAttributes
+                scheme="Darcula"
+                file="colorScheme/Darcula_kdl.xml"/>
     </extensions>
 
     <applicationListeners>
