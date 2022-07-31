@@ -45,8 +45,8 @@ public class KdlColorSettingsPage implements RainbowColorSettingsPage {
 
     @Override
     public @NonNls @NotNull String getDemoText() {
-        return "<node>\"parent node\"</node> \"argument\" 123 {\n" +
-                "    <node>child</node> <key>a</key>=false <key>b</key>=null <key>\"string\"</key>=(<typeref>type</typeref>)\"string\";\n" +
+        return "\"parent node\" \"argument\" 123 {\n" +
+                "    child <key>a</key>=false <key>b</key>=null <key>\"string\"</key>=(<typeref>type</typeref>)\"string\";\n" +
                 "}";
     }
 
@@ -55,7 +55,6 @@ public class KdlColorSettingsPage implements RainbowColorSettingsPage {
         Map<String,TextAttributesKey> map = new HashMap<>();
         map.put("key", KdlSyntaxHighlighter.PROPERTY_KEY);
         map.put("typeref", KdlSyntaxHighlighter.TYPE_SPECIFIER);
-        map.put("node", KdlSyntaxHighlighter.NODE_NAME);
         return map;
     }
 

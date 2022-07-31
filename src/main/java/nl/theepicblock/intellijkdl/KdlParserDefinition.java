@@ -18,8 +18,10 @@ import java.lang.annotation.ElementType;
 
 
 public class KdlParserDefinition implements ParserDefinition {
-    public static final TokenSet WHITE_SPACES = TokenSet.create(/*KdlTypes.LINESPACE, KdlTypes.NEWLINE, KdlTypes.WS, KdlTypes.UNICODESPACE, KdlTypes.BOM*/);
+    public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE);
     public static final TokenSet COMMENTS = TokenSet.create();
+    public static final TokenSet STRINGS = TokenSet.create(KdlTypes.STRING);
+    public static final TokenSet VALUES = TokenSet.create(KdlTypes.STRING, KdlTypes.DECIMAL, KdlTypes.HEX, KdlTypes.BINARY, KdlTypes.OCTAL);
 
     public static final IFileElementType FILE = new IFileElementType(KdlLanguage.INSTANCE);
 
@@ -44,7 +46,7 @@ public class KdlParserDefinition implements ParserDefinition {
     @NotNull
     @Override
     public TokenSet getStringLiteralElements() {
-        return TokenSet.EMPTY;
+        return STRINGS;
     }
 
     @NotNull
@@ -62,9 +64,17 @@ public class KdlParserDefinition implements ParserDefinition {
     public @NotNull PsiFile createFile(@NotNull FileViewProvider viewProvider) {
         return new KdlFile(viewProvider);
     }
-
     @Override
     public @NotNull SpaceRequirements spaceExistenceTypeBetweenTokens(ASTNode left, ASTNode right) {
+        if (left.getElementType().equals(KdlTypes.BACKSLASH)) {
+            return SpaceRequirements.MUST_LINE_BREAK;
+        }
+        if (left.getElementType().equals(KdlTypes.EQUALS) || right.getElementType().equals(KdlTypes.EQUALS)) {
+            return SpaceRequirements.MUST_NOT;
+        }
+        if (right.getElementType().equals(KdlTypes.BAREIDENTIFIER) || VALUES.contains(right.getElementType())) {
+            return SpaceRequirements.MUST;
+        }
         return SpaceRequirements.MAY;
     }
 

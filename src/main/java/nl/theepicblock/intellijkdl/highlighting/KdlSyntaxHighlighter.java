@@ -14,7 +14,6 @@ import org.jetbrains.annotations.NotNull;
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 
 public class KdlSyntaxHighlighter extends SyntaxHighlighterBase {
-    // Added by annotators
     public static final TextAttributesKey NODE_NAME =
             createTextAttributesKey("KDL_NODE_NAME", DefaultLanguageHighlighterColors.CLASS_NAME);
     public static final TextAttributesKey SEPARATOR =
@@ -64,7 +63,8 @@ public class KdlSyntaxHighlighter extends SyntaxHighlighterBase {
         if (tokenType.equals(KdlTypes.STARTTYPE)) return new TextAttributesKey[]{PARENTHESES};
         if (tokenType.equals(KdlTypes.ENDTYPE)) return new TextAttributesKey[]{PARENTHESES};
         if (tokenType.equals(KdlTypes.SEMICOLON)) return new TextAttributesKey[]{SEMICOLON};
-//        if (tokenType.equals(KdlTypes.BAREIDENTIFIER)) return new TextAttributesKey[]{PROPERTY_KEY}; // Sets all bare identifiers to look like property keys, will be replaced with the correct values via the annotator
+        if (tokenType.equals(KdlTypes.NODE_BAREIDENTIFIER)) return new TextAttributesKey[]{NODE_NAME};
+        if (tokenType.equals(KdlTypes.NODE_IDENTIFIER_STRING)) return new TextAttributesKey[]{NODE_NAME};
         if (tokenType.equals(TokenType.BAD_CHARACTER)) return new TextAttributesKey[]{BAD_CHARACTER};
         return new TextAttributesKey[0];
     }

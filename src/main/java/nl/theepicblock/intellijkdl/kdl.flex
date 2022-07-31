@@ -15,6 +15,25 @@ import nl.theepicblock.intellijkdl.psi.KdlTypes;
 %eof{  return;
 %eof}
 
+%{
+    private int beforeBackslash = -29;
+    private void setBackslash() {
+        assert beforeBackslash == -29;
+        beforeBackslash = yystate();
+        yybegin(AFTER_BACKSLASH);
+    }
+
+    private void onNewline() {
+        if (yystate() == AFTER_BACKSLASH) {
+            assert beforeBackslash != -29;
+            yybegin(beforeBackslash);
+            beforeBackslash = -29;
+        } else {
+            yybegin(YYINITIAL);
+        }
+    }
+%}
+
 BOM=\uFEFF
 
 LINESPACE={NEWLINE} | {WS}
@@ -45,22 +64,26 @@ OCTAL={SIGN}? "0o" [0-7] [0-7_]*
 BINARY={SIGN}? "0b" [01] [01_]*
 BOOLEAN="true" | "false"
 
+%state IN_NODE
+%state AFTER_BACKSLASH
 
 %%
 
-{NEWLINE}                                       { return KdlTypes.NEWLINE; }
-{UNICODE_SPACE}                                 { return KdlTypes.UNICODESPACE; }
-{BOM}                                           { return KdlTypes.BOM; }
+{NEWLINE}                                       { onNewline(); return TokenType.WHITE_SPACE; }
+{UNICODE_SPACE}                                 { return TokenType.WHITE_SPACE; }
+{BOM}                                           { return TokenType.WHITE_SPACE; }
 {BOOLEAN}                                       { return KdlTypes.BOOLEAN; }
 "null"                                          { return KdlTypes.NULL; }
-{BARE_IDENTIFIER}                               { return KdlTypes.BAREIDENTIFIER; }
-{STRING}                                        { return KdlTypes.STRING; }
+<YYINITIAL> {BARE_IDENTIFIER}                   { yybegin(IN_NODE); return KdlTypes.NODE_BAREIDENTIFIER; }
+<YYINITIAL> {STRING}                            { yybegin(IN_NODE); return KdlTypes.NODE_IDENTIFIER_STRING; }
+<IN_NODE> {BARE_IDENTIFIER}                     { return KdlTypes.BAREIDENTIFIER; }
+<IN_NODE> {STRING}                              { return KdlTypes.STRING; }
 {DECIMAL}                                       { return KdlTypes.DECIMAL; }
 {HEX}                                           { return KdlTypes.HEX; }
 {OCTAL}                                         { return KdlTypes.OCTAL; }
 {BINARY}                                        { return KdlTypes.BINARY; }
 "/-"                                            { return KdlTypes.CTXCOMMENT; }
-"\\"                                            { return KdlTypes.BACKSLASH; }
+"\\"                                            { setBackslash(); return KdlTypes.BACKSLASH; }
 "="                                             { return KdlTypes.EQUALS; }
 "{"                                             { return KdlTypes.STARTNODE; }
 "}"                                             { return KdlTypes.ENDNODE; }

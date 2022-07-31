@@ -16,23 +16,21 @@
 kdlFile ::= nodes
 
 //nodes ::= linespace* (node_ nodes?)? linespace*
-nodes ::= linespace* (node_ linespace*)*
+nodes ::= node_*
 
-node_ ::= (ctxcomment node-space*)? type? identifier (node-space?/*+*/ node-prop-or-arg)* (node-space* node-children ws*)? node-space* node-terminator
-node-prop-or-arg ::= (ctxcomment node-space*)? (prop | value)
-node-space ::= ws* escline ws* | ws+
-node-children ::= (ctxcomment node-space*)? startnode-wrapper nodes endnode
+node_ ::= (ctxcomment escline*)? type? node-identifier (escline* node-prop-or-arg)* (escline* node-children)? escline* node-terminator?
+node-identifier ::= node-identifier-string | node-bareidentifier
+node-prop-or-arg ::= (ctxcomment escline*)? (prop | value)
+node-children ::= (ctxcomment escline*)? startnode-wrapper nodes endnode
 startnode-wrapper ::= startnode
-node-terminator ::= semicolon | newline | <<eof>>
+node-terminator ::= semicolon
 
 prop ::= identifier equals value
 
-escline ::= backslash ws* (/*single-line-comment |*/ newline)
+escline ::= backslash (/*single-line-comment |*/)
 
 value ::= type? (string-literal | number | keyword)
 string-literal ::= string
-linespace ::= newline | ws //| single-line-comment
-ws ::= bom | unicodespace //| multi-line-comment
 type ::= starttype identifier endtype
 
 identifier ::= string | bareidentifier

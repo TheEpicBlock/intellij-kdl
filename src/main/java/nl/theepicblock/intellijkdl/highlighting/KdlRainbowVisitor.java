@@ -20,8 +20,8 @@ public class KdlRainbowVisitor extends RainbowVisitor {
         if (element instanceof KdlNode_) {
             KdlNode_ node = (KdlNode_)element;
             PsiFile file = element.getContainingFile();
-            String name = "node"+node.getIdentifier().getText();
-            addInfo(getInfo(file, node.getIdentifier(), name, KdlSyntaxHighlighter.NODE_NAME));
+            String name = "node"+node.getNodeIdentifier().getText();
+            addInfo(getInfo(file, node.getNodeIdentifier(), name, KdlSyntaxHighlighter.NODE_NAME));
             if (node.getNodeChildren() != null) {
                 addInfo(getInfo(file, node.getNodeChildren().getStartnodeWrapper(), name, KdlSyntaxHighlighter.BRACE));
                 addInfo(getInfo(file, node.getNodeChildren().getLastChild(), name, KdlSyntaxHighlighter.BRACE));
