@@ -105,14 +105,14 @@ public class KdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // (ctxcomment node-space*)? startnode nodes endnode
+  // (ctxcomment node-space*)? startnode-wrapper nodes endnode
   public static boolean node_children(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "node_children")) return false;
     if (!nextTokenIs(b, "<node children>", CTXCOMMENT, STARTNODE)) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, NODE_CHILDREN, "<node children>");
     r = node_children_0(b, l + 1);
-    r = r && consumeToken(b, STARTNODE);
+    r = r && startnode_wrapper(b, l + 1);
     r = r && nodes(b, l + 1);
     r = r && consumeToken(b, ENDNODE);
     exit_section_(b, l, m, r, false, null);
@@ -503,6 +503,30 @@ public class KdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // startnode
+  public static boolean startnode_wrapper(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "startnode_wrapper")) return false;
+    if (!nextTokenIs(b, STARTNODE)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, STARTNODE);
+    exit_section_(b, m, STARTNODE_WRAPPER, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // string
+  public static boolean string_literal(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "string_literal")) return false;
+    if (!nextTokenIs(b, STRING)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, STRING);
+    exit_section_(b, m, STRING_LITERAL, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // starttype identifier endtype
   public static boolean type(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "type")) return false;
@@ -517,7 +541,7 @@ public class KdlParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // type? (string | number | keyword)
+  // type? (string-literal | number | keyword)
   public static boolean value(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "value")) return false;
     boolean r;
@@ -535,11 +559,11 @@ public class KdlParser implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // string | number | keyword
+  // string-literal | number | keyword
   private static boolean value_1(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "value_1")) return false;
     boolean r;
-    r = consumeToken(b, STRING);
+    r = string_literal(b, l + 1);
     if (!r) r = number(b, l + 1);
     if (!r) r = keyword(b, l + 1);
     return r;

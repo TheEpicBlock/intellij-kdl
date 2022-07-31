@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class KdlParserDefinition implements ParserDefinition {
-    public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE);
+    public static final TokenSet WHITE_SPACES = TokenSet.create(/*KdlTypes.LINESPACE, KdlTypes.NEWLINE, KdlTypes.WS, KdlTypes.UNICODESPACE, KdlTypes.BOM*/);
     public static final TokenSet COMMENTS = TokenSet.create();
 
     public static final IFileElementType FILE = new IFileElementType(KdlLanguage.INSTANCE);

@@ -14,6 +14,9 @@ public interface KdlValue extends PsiElement {
   KdlNumber getNumber();
 
   @Nullable
+  KdlStringLiteral getStringLiteral();
+
+  @Nullable
   KdlType getType();
 
 }

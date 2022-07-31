@@ -5,15 +5,6 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface KdlNodeChildren extends PsiElement {
-
-  @NotNull
-  List<KdlNodeSpace> getNodeSpaceList();
-
-  @NotNull
-  KdlNodes getNodes();
-
-  @NotNull
-  KdlStartnodeWrapper getStartnodeWrapper();
+public interface KdlStringLiteral extends PsiElement {
 
 }

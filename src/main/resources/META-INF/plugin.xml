@@ -18,6 +18,16 @@
         <lang.parserDefinition
                 language="kdl"
                 implementationClass="nl.theepicblock.intellijkdl.KdlParserDefinition"/>
+        <lang.syntaxHighlighterFactory
+                language="kdl"
+                implementationClass="nl.theepicblock.intellijkdl.highlighting.KdlSyntaxHighlighterFactory"/>
+        <colorSettingsPage
+                implementation="nl.theepicblock.intellijkdl.highlighting.KdlColorSettingsPage"/>
+        <highlightVisitor
+                implementation="nl.theepicblock.intellijkdl.highlighting.KdlRainbowVisitor"/>
+        <annotator
+                language="kdl"
+                implementationClass="nl.theepicblock.intellijkdl.highlighting.KdlAnnotator"/>
     </extensions>
 
     <applicationListeners>

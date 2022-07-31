@@ -22,6 +22,8 @@ public interface KdlTypes {
   IElementType NODE_TERMINATOR = new KdlElementType("NODE_TERMINATOR");
   IElementType NUMBER = new KdlElementType("NUMBER");
   IElementType PROP = new KdlElementType("PROP");
+  IElementType STARTNODE_WRAPPER = new KdlElementType("STARTNODE_WRAPPER");
+  IElementType STRING_LITERAL = new KdlElementType("STRING_LITERAL");
   IElementType TYPE = new KdlElementType("TYPE");
   IElementType VALUE = new KdlElementType("VALUE");
   IElementType WS = new KdlElementType("WS");
@@ -84,6 +86,12 @@ public interface KdlTypes {
       }
       else if (type == PROP) {
         return new KdlPropImpl(node);
+      }
+      else if (type == STARTNODE_WRAPPER) {
+        return new KdlStartnodeWrapperImpl(node);
+      }
+      else if (type == STRING_LITERAL) {
+        return new KdlStringLiteralImpl(node);
       }
       else if (type == TYPE) {
         return new KdlTypeImpl(node);

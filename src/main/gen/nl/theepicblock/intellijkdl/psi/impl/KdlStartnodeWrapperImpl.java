@@ -11,38 +11,20 @@ import static nl.theepicblock.intellijkdl.psi.KdlTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import nl.theepicblock.intellijkdl.psi.*;
 
-public class KdlNodeChildrenImpl extends ASTWrapperPsiElement implements KdlNodeChildren {
+public class KdlStartnodeWrapperImpl extends ASTWrapperPsiElement implements KdlStartnodeWrapper {
 
-  public KdlNodeChildrenImpl(@NotNull ASTNode node) {
+  public KdlStartnodeWrapperImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull KdlVisitor visitor) {
-    visitor.visitNodeChildren(this);
+    visitor.visitStartnodeWrapper(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof KdlVisitor) accept((KdlVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @NotNull
-  public List<KdlNodeSpace> getNodeSpaceList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, KdlNodeSpace.class);
-  }
-
-  @Override
-  @NotNull
-  public KdlNodes getNodes() {
-    return findNotNullChildByClass(KdlNodes.class);
-  }
-
-  @Override
-  @NotNull
-  public KdlStartnodeWrapper getStartnodeWrapper() {
-    return findNotNullChildByClass(KdlStartnodeWrapper.class);
   }
 
 }

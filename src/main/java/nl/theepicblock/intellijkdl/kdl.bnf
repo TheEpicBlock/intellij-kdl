@@ -20,14 +20,16 @@ nodes ::= linespace* (node_ nodes?)? linespace*
 node_ ::= (ctxcomment node-space*)? type? identifier (node-space+ node-prop-or-arg)* (node-space* node-children ws*)? node-space* node-terminator
 node-prop-or-arg ::= (ctxcomment node-space*)? (prop | value)
 node-space ::= ws* escline ws* | ws+
-node-children ::= (ctxcomment node-space*)? startnode nodes endnode
+node-children ::= (ctxcomment node-space*)? startnode-wrapper nodes endnode
+startnode-wrapper ::= startnode
 node-terminator ::= semicolon | newline | <<eof>>
 
 prop ::= identifier equals value
 
 escline ::= backslash ws* (/*single-line-comment |*/ newline)
 
-value ::= type? (string | number | keyword)
+value ::= type? (string-literal | number | keyword)
+string-literal ::= string
 linespace ::= newline | ws //| single-line-comment
 ws ::= bom | unicodespace //| multi-line-comment
 type ::= starttype identifier endtype

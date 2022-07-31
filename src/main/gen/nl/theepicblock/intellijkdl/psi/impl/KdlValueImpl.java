@@ -41,6 +41,12 @@ public class KdlValueImpl extends ASTWrapperPsiElement implements KdlValue {
 
   @Override
   @Nullable
+  public KdlStringLiteral getStringLiteral() {
+    return findChildByClass(KdlStringLiteral.class);
+  }
+
+  @Override
+  @Nullable
   public KdlType getType() {
     return findChildByClass(KdlType.class);
   }

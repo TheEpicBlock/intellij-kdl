@@ -55,6 +55,14 @@ public class KdlVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
+  public void visitStartnodeWrapper(@NotNull KdlStartnodeWrapper o) {
+    visitPsiElement(o);
+  }
+
+  public void visitStringLiteral(@NotNull KdlStringLiteral o) {
+    visitPsiElement(o);
+  }
+
   public void visitType(@NotNull KdlType o) {
     visitPsiElement(o);
   }
